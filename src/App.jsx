@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./containers/Header";
-import ProductDetail from "./containers/ProductDetail";
+import ProductDetail from "./routes/ProductDetail";
 import Cart from "./routes/Cart";
 import ProductPage from "./routes/ProductPage";
 import HomePage from "./routes/HomePage";
+import Login from "./routes/Login";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             element={<ProductDetail />}
           />
           <Route path="/cart" component={Cart} element={<Cart />} />
+          <Route path="/login" component={Login} element={<Login />} />
           <Route>404 Not Found!</Route>
         </Routes>
       </BrowserRouter>

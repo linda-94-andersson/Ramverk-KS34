@@ -119,6 +119,11 @@ const Header = () => {
                 </Dropdown.Menu>
               </Dropdown>
             )}
+            <Link to="/login">
+              <Button variant="light" style={{ marginLeft: 7 }}>
+                Login
+              </Button>
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
