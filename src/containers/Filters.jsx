@@ -1,11 +1,11 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
-import { CartState } from "../context/Context";
+import { CartState } from "../redux/context/Context";
 
 const Filters = () => {
   const {
-    productState: { sort },
-    productDispatch,
+    filterState: { sort },
+    filterDispatch,
   } = CartState();
 
   const refresh = () => {
@@ -26,7 +26,7 @@ const Filters = () => {
             type="radio"
             id={`inline-1`}
             onChange={() =>
-              productDispatch({
+              filterDispatch({
                 type: "SORT_BY_PRICE",
                 payload: "lowToHigh",
               })
@@ -43,7 +43,7 @@ const Filters = () => {
             type="radio"
             id={`inline-2`}
             onChange={() =>
-              productDispatch({
+              filterDispatch({
                 type: "SORT_BY_PRICE",
                 payload: "highToLow",
               })
@@ -55,7 +55,7 @@ const Filters = () => {
       <Button
         variant="light"
         onClick={() => {
-          productDispatch({
+          filterDispatch({
             type: "CLEAR_FILTERS",
           });
           refresh();

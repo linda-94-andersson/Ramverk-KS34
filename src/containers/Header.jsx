@@ -9,14 +9,14 @@ import {
   Button,
 } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import { CartState } from "../context/Context";
+import { CartState } from "../redux/context/Context";
 import { AiFillDelete } from "react-icons/ai";
 
 const Header = () => {
   const {
     state: { cart },
     cartDispatch,
-    productDispatch,
+    filterDispatch,
   } = CartState();
 
   return (
@@ -44,7 +44,7 @@ const Header = () => {
                 className="m-auto"
                 aria-label="Search"
                 onChange={(e) => {
-                  productDispatch({
+                  filterDispatch({
                     type: "FILTER_BY_SEARCH",
                     payload: e.target.value,
                   });

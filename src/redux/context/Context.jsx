@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../redux/actions/productActions";
-import { cartReducer, productReducer } from "./Reducers";
+import { fetchProducts } from "../actions/productActions";
+import { cartReducer } from "../reducers/cartReducer";
+import { filterReducer } from "../reducers/filterReducer";
 
 const Cart = createContext();
 
@@ -30,13 +31,14 @@ const Context = ({ children }) => {
 
   localStorage.setItem("cart", JSON.stringify(state.cart));
 
-  const [productState, productDispatch] = useReducer(productReducer, {
+  const [filterState, filterDispatch] = useReducer(filterReducer, {
     searchQuery: "",
+    sortByCATE: "",
   });
 
   return (
     <Cart.Provider
-      value={{ state, cartDispatch, productState, productDispatch }}
+      value={{ state, cartDispatch, filterState, filterDispatch }}
     >
       {children}
     </Cart.Provider>

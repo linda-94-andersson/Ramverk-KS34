@@ -6,7 +6,7 @@ import {
   removeSelectedProduct,
 } from "../redux/actions/productActions";
 import { Button, Card } from "react-bootstrap";
-import { CartState } from "../context/Context";
+import { CartState } from "../redux/context/Context";
 
 const ProductDetail = () => {
   let product = useSelector((state) => state.product);

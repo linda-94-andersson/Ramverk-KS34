@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button, Card } from "react-bootstrap";
-import { CartState } from "../context/Context";
+import { CartState } from "../redux/context/Context";
 
 const ProductComponent = () => {
   const setShowButton = useRef(false);
@@ -27,7 +27,7 @@ const ProductComponent = () => {
 
   const {
     state: { cart },
-    productState: { sort, searchQuery },
+    filterState: { sort, searchQuery },
     cartDispatch,
   } = CartState();
 

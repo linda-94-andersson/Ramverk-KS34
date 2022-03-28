@@ -2,13 +2,13 @@ import React from "react";
 import { Button, Card, Carousel } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { CartState } from "../context/Context";
+import { CartState } from "../redux/context/Context";
 
 function HomePage() {
   const products = useSelector((state) => state.allProducts.products);
 
   const {
-    productState: { searchQuery },
+    filterState: { searchQuery },
   } = CartState();
 
   const transformProducts = () => {
