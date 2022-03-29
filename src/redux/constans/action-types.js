@@ -12,4 +12,5 @@ export const ActionTypes = {
     CLEAR_FILTERS: "CLEAR_FILTERS",
     SORT_BY_CATEGORY: "SORT_BY_CATEGORY",
     AUTH_SIGN_UP: "AUTH_SIGN_UP",
+    SIGN_IN: "SIGN_IN",
 };

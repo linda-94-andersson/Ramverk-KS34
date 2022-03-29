@@ -2,36 +2,47 @@ import axios from "axios";
 import { url } from "../../apis/fakeStoreApi";
 import { ActionTypes } from "../constans/action-types";
 
-export const signUp = () => async (dispatch) => {
-    const response = await axios.post(
-        `${url}/users/`,
+export const signUp = (user) => (dispatch) => {
+    axios.post(`${url}/users`,
         {
-            email: 'John@gmail.com',
-            username: 'johnd',
-            password: 'm38rmF$',
-            role: 'user',
+            email: 'email@gmail.com',
+            username: user.username,
+            password: user.password,
+            role: '',
             name: {
-                firstname: 'John',
-                lastname: 'Doe',
+                firstname: 'firstname',
+                lastname: 'lastname',
             },
             address: {
-                city: 'kilcoole',
-                street: '7835 new road',
-                number: 3,
-                zipcode: '12926-3874',
+                city: '',
+                street: '',
+                number: 1,
+                zipcode: '',
             },
-            phone: '1-570-236-7033',
+            phone: '',
         }
     )
         .then((token) => {
             localStorage.setItem("token", JSON.stringify(token.data));
+            console.log(token);
 
             dispatch({
                 type: ActionTypes.AUTH_SIGN_UP,
                 token: token.data,
             });
         })
-    console.log(response);
+}
+
+export const signIn = (user) => (dispatch) => {
+    axios.post(`${url}/auth/login`, user)
+        .then((token) => {
+            localStorage.setItem("token", JSON.stringify(token.data));
+
+            dispatch({
+                type: ActionTypes.SIGN_IN,
+                token: token.data,
+            });
+        })
 }
 
 // Lindas barve attemnts that failed
