@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Form, Button } from "react-bootstrap";
 import { signIn } from "../redux/actions/authActions";
 
 function SignIn() {
   const dispatch = useDispatch();
   const sign = useSelector((state) => state.signIn);
-  console.log(sign , " In");
+  console.log(sign, " In");
 
-  const [user, setUser] = useState({
+  const [creds, setCreds] = useState({
     username: "",
     password: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signIn(user));
-    setUser({
+    dispatch(signIn(creds));
+    setCreds({
       username: "",
       password: "",
     });
@@ -33,8 +33,8 @@ function SignIn() {
           <Form.Control
             type="name"
             placeholder="Enter username"
-            value={user.username}
-            onChange={(e) => setUser({ ...user, username: e.target.value })}
+            value={creds.username}
+            onChange={(e) => setCreds({ ...creds, username: e.target.value })}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPasswordIn">
@@ -42,8 +42,8 @@ function SignIn() {
           <Form.Control
             type="password"
             placeholder="Enter password"
-            value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            value={creds.password}
+            onChange={(e) => setCreds({ ...creds, password: e.target.value })}
           />
         </Form.Group>
         <Button variant="primary" type="submit">

@@ -31,10 +31,13 @@ export const signUp = (user) => (dispatch) => {
                 token: token.data,
             });
         })
+        .catch((error) => {
+            console.log(error.response);
+        })
 }
 
-export const signIn = (user) => (dispatch) => {
-    axios.post(`${url}/auth/login`, user)
+export const signIn = (creds) => (dispatch) => {
+    axios.post(`${url}/auth/login`, creds)
         .then((token) => {
             localStorage.setItem("token", JSON.stringify(token.data));
 
@@ -42,6 +45,9 @@ export const signIn = (user) => (dispatch) => {
                 type: ActionTypes.SIGN_IN,
                 token: token.data,
             });
+        })
+        .catch((error) => {
+            console.log(error.response);
         })
 }
 
