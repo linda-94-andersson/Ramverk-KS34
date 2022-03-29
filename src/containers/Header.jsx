@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   Badge,
   Container,
@@ -18,6 +19,8 @@ const Header = () => {
     cartDispatch,
     filterDispatch,
   } = CartState();
+
+  const auth = useSelector((state) => state.auth);
 
   return (
     <Navbar
@@ -119,11 +122,15 @@ const Header = () => {
                 </Dropdown.Menu>
               </Dropdown>
             )}
-            <Link to="/login">
-              <Button variant="light" style={{ marginLeft: 7 }}>
-                Login
-              </Button>
-            </Link>
+            {auth._id ? (
+              <Button style={{ marginLeft: 7 }}>Logout</Button>
+            ) : (
+              <Link to="/login">
+                <Button variant="light" style={{ marginLeft: 7 }}>
+                  Login
+                </Button>
+              </Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

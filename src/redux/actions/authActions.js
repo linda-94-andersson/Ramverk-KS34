@@ -1,10 +1,10 @@
 import axios from "axios";
-import fakeStoreApi, { url } from "../../apis/fakeStoreApi";
+import { url } from "../../apis/fakeStoreApi";
 import { ActionTypes } from "../constans/action-types";
 
 export const signUp = () => async (dispatch) => {
     const response = await axios.post(
-        'https://k4backend.osuka.dev/users/',
+        `${url}/users/`,
         {
             email: 'John@gmail.com',
             username: 'johnd',

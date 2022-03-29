@@ -29,19 +29,19 @@ const SignUp = () => {
     <div>
       <Form style={{ width: "50%" }} onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicName">
-          <Form.Label>Username</Form.Label>
+          <Form.Label>Register username</Form.Label>
           <Form.Control
             type="name"
-            placeholder="Enter username"
+            placeholder="Enter a username"
             value={user.username}
             onChange={(e) => setUser({ ...user, username: e.target.value })}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Register Password</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Enter password"
+            placeholder="Enter a password"
             value={user.password}
             onChange={(e) => setUser({ ...user, password: e.target.value })}
           />
