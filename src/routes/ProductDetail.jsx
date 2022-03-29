@@ -5,8 +5,8 @@ import {
   fetchProduct,
   removeSelectedProduct,
 } from "../redux/actions/productActions";
-import { Button, Card } from "react-bootstrap";
 import { CartState } from "../redux/context/Context";
+import { Button, Card } from "react-bootstrap";
 
 const ProductDetail = () => {
   let product = useSelector((state) => state.product);

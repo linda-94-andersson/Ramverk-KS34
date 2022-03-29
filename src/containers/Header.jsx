@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   Badge,
   Container,
@@ -8,7 +9,6 @@ import {
   Dropdown,
   Button,
 } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
 import { CartState } from "../redux/context/Context";
 import { AiFillDelete } from "react-icons/ai";
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { Button, Card, Carousel } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Button, Card, Carousel } from "react-bootstrap";
 import { CartState } from "../redux/context/Context";
 
 function HomePage() {
