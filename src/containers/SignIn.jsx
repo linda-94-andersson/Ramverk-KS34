@@ -7,7 +7,6 @@ import { signIn } from "../redux/actions/authActions";
 function SignIn() {
   const dispatch = useDispatch();
   const sign = useSelector((state) => state.signIn);
-  console.log(sign, " In");
 
   const [creds, setCreds] = useState({
     username: "",

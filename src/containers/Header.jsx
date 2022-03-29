@@ -1,6 +1,6 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Badge,
   Container,
@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import { CartState } from "../redux/context/Context";
 import { AiFillDelete } from "react-icons/ai";
+import { singOut } from "../redux/actions/authActions";
 
 const Header = () => {
   const {
@@ -22,6 +23,14 @@ const Header = () => {
 
   const auth = useSelector((state) => state.auth);
   const sign = useSelector((state) => state.signIn);
+
+  const history = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleSignOut = () => {
+    dispatch(singOut());
+    history("/login");
+  };
 
   return (
     <Navbar
@@ -128,7 +137,12 @@ const Header = () => {
                 <Link to="/profile">
                   <Button style={{ marginLeft: 7 }}>Profile</Button>
                 </Link>
-                <Button style={{ marginLeft: 7 }}>Logout</Button>
+                <Button
+                  style={{ marginLeft: 7 }}
+                  onClick={() => handleSignOut()}
+                >
+                  Logout
+                </Button>
               </>
             ) : (
               <Link to="/login">

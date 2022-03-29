@@ -13,4 +13,5 @@ export const ActionTypes = {
     SORT_BY_CATEGORY: "SORT_BY_CATEGORY",
     AUTH_SIGN_UP: "AUTH_SIGN_UP",
     SIGN_IN: "SIGN_IN",
+    SIGN_OUT: "SIGN_OUT",
 };

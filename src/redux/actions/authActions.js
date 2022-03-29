@@ -51,6 +51,14 @@ export const signIn = (creds) => (dispatch) => {
         })
 }
 
+export const singOut = () => {
+    return (dispatch) => {
+        dispatch({
+            type: ActionTypes.SIGN_OUT,
+        });
+    }
+}
+
 // Lindas barve attemnts that failed
 // export const signUp = (user) => {
 //     return async function (dispatch) {

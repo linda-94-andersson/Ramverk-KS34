@@ -7,7 +7,6 @@ import { signUp } from "../redux/actions/authActions";
 const SignUp = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  console.log(auth , " Up");
 
   const [user, setUser] = useState({
     username: "",

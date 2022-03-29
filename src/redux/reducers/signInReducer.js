@@ -8,6 +8,9 @@ const signInReducer = (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.SIGN_IN:
             return { ...initialState, token: action.token };
+        case ActionTypes.SIGN_OUT:
+            localStorage.removeItem("token");
+            return { token: null, username: null, _id: null, };
         default:
             return state;
     }

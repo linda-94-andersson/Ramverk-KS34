@@ -11,6 +11,9 @@ const authReducer = (state = initialState, action) => {
         case ActionTypes.AUTH_SIGN_UP:
             const user = (action.token)
             return { ...initialState, token: action.token, username: user.username, _id: user._id };
+        case ActionTypes.SIGN_OUT:
+            localStorage.removeItem("token");
+            return { token: null, username: null, _id: null, };
         default:
             return state;
     }
