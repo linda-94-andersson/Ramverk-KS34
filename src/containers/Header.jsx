@@ -21,7 +21,6 @@ const Header = () => {
     filterDispatch,
   } = CartState();
 
-  const auth = useSelector((state) => state.auth);
   const sign = useSelector((state) => state.signInOut);
 
   const history = useNavigate();
@@ -132,7 +131,7 @@ const Header = () => {
                 </Dropdown.Menu>
               </Dropdown>
             )}
-            {auth._id || sign.token ? (
+            {sign.token ? (
               <>
                 <Link to="/profile">
                   <Button variant="light" style={{ marginLeft: 7 }}>
