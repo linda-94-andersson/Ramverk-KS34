@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Navigate} from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Navigate } from "react-router-dom";
+import { Form, Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../redux/actions/authActions";
 
@@ -22,11 +22,11 @@ const SignUp = () => {
     });
   };
 
-  if (auth._id) return <Navigate to="/profile" />;
+  if (auth._id) return <Navigate to="/login" />;
 
   return (
-    <div>
-      <Form style={{ width: "50%" }} onSubmit={handleSubmit}>
+    <Container style={{ marginTop: 40, width: "50%" }}>
+      <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Register username</Form.Label>
           <Form.Control
@@ -46,10 +46,10 @@ const SignUp = () => {
           />
         </Form.Group>
         <Button variant="primary" type="submit">
-          SignUp
+          Sign up
         </Button>
       </Form>
-    </div>
+    </Container>
   );
 };
 

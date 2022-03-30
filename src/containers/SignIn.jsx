@@ -6,7 +6,7 @@ import { signIn } from "../redux/actions/authActions";
 
 function SignIn() {
   const dispatch = useDispatch();
-  const sign = useSelector((state) => state.signIn);
+  const sign = useSelector((state) => state.signInOut);
 
   const [creds, setCreds] = useState({
     username: "",
@@ -26,7 +26,7 @@ function SignIn() {
 
   return (
     <div>
-      <Form style={{ width: "50%" }} onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicNameIn">
           <Form.Label>Your username</Form.Label>
           <Form.Control

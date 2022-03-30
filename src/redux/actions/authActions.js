@@ -14,12 +14,12 @@ export const signUp = (user) => (dispatch) => {
                 lastname: 'lastname',
             },
             address: {
-                city: '',
-                street: '',
+                city: 'stockholm',
+                street: 'gatan',
                 number: 1,
-                zipcode: '',
+                zipcode: '11-11',
             },
-            phone: '',
+            phone: '070-000-11-11',
         }
     )
         .then((token) => {
@@ -32,7 +32,7 @@ export const signUp = (user) => (dispatch) => {
             });
         })
         .catch((error) => {
-            console.log(error.response);
+            console.log(error.response, " error signUp");
         })
 }
 
@@ -47,7 +47,7 @@ export const signIn = (creds) => (dispatch) => {
             });
         })
         .catch((error) => {
-            console.log(error.response);
+            console.log(error.response, " error signIn");
         })
 }
 

@@ -14,4 +14,5 @@ export const ActionTypes = {
     AUTH_SIGN_UP: "AUTH_SIGN_UP",
     SIGN_IN: "SIGN_IN",
     SIGN_OUT: "SIGN_OUT",
+    GET_USERDATA: "GET_USERDATA",
 };

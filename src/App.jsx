@@ -7,13 +7,13 @@ import ProductDetail from "./routes/ProductDetail";
 import Cart from "./routes/Cart";
 import Login from "./routes/Login";
 import ProfilePage from "./routes/ProfilePage";
+import SignUp from "./routes/SignUp";
 
 function App() {
-
   // function RequireAuth({ children }) {
   //   let auth = useAuth();
   //   let location = useLocation();
-  
+
   //   if (!auth.user) {
   //     // Redirect them to the /login page, but save the current location they were
   //     // trying to go to when they were redirected. This allows us to send them
@@ -21,7 +21,7 @@ function App() {
   //     // than dropping them off on the home page.
   //     return <Navigate to="/profile" state={{ from: location }} replace />;
   //   }
-  
+
   //   return children;
   // }
 
@@ -30,27 +30,17 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" exact component={HomePage} element={<HomePage />} />
-          <Route
-            path="/products"
-            exact
-            component={ProductPage}
-            element={<ProductPage />}
-          />
-          <Route
-            path="/product/:productId"
-            exact
-            component={ProductDetail}
-            element={<ProductDetail />}
-          />
-          <Route path="/cart" component={Cart} element={<Cart />} />
-          <Route path="/login" component={Login} element={<Login />} />
+          <Route path="/" exact element={<HomePage />} />
+          <Route path="/products" exact element={<ProductPage />} />
+          <Route path="/product/:productId" exact element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<SignUp />} />
           <Route
             path="/profile"
-            component={ProfilePage}
             element={
               // <RequireAuth>
-                <ProfilePage />
+              <ProfilePage />
               // </RequireAuth>
             }
           />

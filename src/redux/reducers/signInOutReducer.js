@@ -4,7 +4,7 @@ const initialState = {
     token: JSON.parse(localStorage.getItem("token")),
 }
 
-const signInReducer = (state = initialState, action) => {
+const signInOutReducer = (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.SIGN_IN:
             return { ...initialState, token: action.token };
@@ -16,4 +16,4 @@ const signInReducer = (state = initialState, action) => {
     }
 }
 
-export default signInReducer
+export default signInOutReducer

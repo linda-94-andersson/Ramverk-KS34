@@ -3,7 +3,8 @@ import { productReducer, selectedProductReducer } from "./productReducer";
 import { cartReducer } from "./cartReducer";
 import { filterReducer } from "./filterReducer";
 import authReducer from "./authReducer";
-import signInReducer from "./signInReducer";
+import signInOutReducer from "./signInOutReducer";
+import userDataReducer from "./userDataReducer";
 
 const reducers = combineReducers({
     allProducts: productReducer,
@@ -11,7 +12,8 @@ const reducers = combineReducers({
     cart: cartReducer,
     filter: filterReducer,
     auth: authReducer,
-    signIn: signInReducer,
+    signInOut: signInOutReducer,
+    userData: userDataReducer,
 });
 
 export default reducers; 
