@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col, ListGroup } from "react-bootstrap";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { getUser } from "../redux/actions/authActions";
-import { Button } from "bootstrap";
+import { Button } from "react-bootstrap";
 
 function ProfilePage() {
   const dispatch = useDispatch();
@@ -13,10 +13,10 @@ function ProfilePage() {
   console.log(userData, " userData");
   console.log(userData.userData.role, " role");
 
-  useEffect(() => {
-    if (!sign.token) return;
-    dispatch(getUser(sign.token.userId));
-  }, [sign]);
+  // useEffect(() => {
+  //   if (!sign.token) return;
+  //   dispatch(getUser(sign.token.userId));
+  // }, [sign]);
 
   if (!sign.token) return <Navigate to="/login" />;
 
@@ -84,12 +84,12 @@ function ProfilePage() {
         </Container>
       )}
       <Container>
-        {!userData.userData.role.admin ? (
+        {userData.userData.role !== "admin" ? (
           <>
           </>
         ) : (
           <Link to="/admin">
-            <Button>Admin page</Button>
+            <Button variant="dark" style={{marginTop: 40}}>Admin page</Button>
           </Link>
         )}
       </Container>

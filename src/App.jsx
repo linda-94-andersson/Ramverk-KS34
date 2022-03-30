@@ -1,5 +1,6 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import React, {useEffect} from "react";
+import { BrowserRouter, Routes, Route, } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Header from "./containers/Header";
 import HomePage from "./routes/HomePage";
 import ProductPage from "./routes/ProductPage";
@@ -9,8 +10,22 @@ import Login from "./routes/Login";
 import ProfilePage from "./routes/ProfilePage";
 import SignUp from "./routes/SignUp";
 import Admin from "./routes/Admin";
+import {getAllUsers, getUser} from "./redux/actions/authActions";
 
 function App() {
+  const dispatch = useDispatch();
+  const allUsers = useSelector((state) => state.allUsers.users);
+  const sign = useSelector((state) => state.signInOut);
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, []);
+
+  useEffect(() => {
+    if (!sign.token) return;
+    dispatch(getUser(sign.token.userId));
+  }, [sign]);
+
   return (
     <div className="App">
       <BrowserRouter>

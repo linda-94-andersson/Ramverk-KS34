@@ -5,6 +5,7 @@ import { filterReducer } from "./filterReducer";
 import authReducer from "./authReducer";
 import signInOutReducer from "./signInOutReducer";
 import userDataReducer from "./userDataReducer";
+import allUsersReducer from "./allUsersReducer";
 
 const reducers = combineReducers({
     allProducts: productReducer,
@@ -14,6 +15,7 @@ const reducers = combineReducers({
     auth: authReducer,
     signInOut: signInOutReducer,
     userData: userDataReducer,
+    allUsers: allUsersReducer,
 });
 
 export default reducers; 
