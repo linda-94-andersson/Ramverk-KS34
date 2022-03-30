@@ -45,7 +45,7 @@ const SignUp = () => {
             onChange={(e) => setUser({ ...user, password: e.target.value })}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="dark" type="submit">
           Sign up
         </Button>
       </Form>

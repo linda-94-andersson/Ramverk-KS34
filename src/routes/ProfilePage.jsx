@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { Container, Row, Col, ListGroup } from "react-bootstrap";
 import { url } from "../apis/fakeStoreApi";
@@ -11,25 +11,12 @@ function ProfilePage() {
   console.log(sign, " Sign");
   console.log(userData, " uderData");
 
-  const [data, setData] = useState({
-    username: null,
-    email: null,
-    password: null,
-    name: null,
-    firstname: null,
-    lastname: null,
-    adress: null,
-    city: null,
-    street: null,
-    number: null,
-    zipcode: null,
-    phone: null,
-  });
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    const fetchData = (user) => (dispatch) => {
+    const fetchData = (dispatch) => {
       axios
-        .get(`${url}/users/${sign.token.userId}`, user)
+        .get(`${url}/users/${sign.token.userId}`)
         .then((userData) => {
           localStorage.setItem("user", JSON.stringify(userData.data));
           dispatch({
@@ -40,7 +27,7 @@ function ProfilePage() {
         .catch((error) => {
           console.log(error.response, " error fetchData");
         });
-      setData(userData);
+      setData(userData.data);
     };
 
     fetchData();
@@ -72,35 +59,35 @@ function ProfilePage() {
         <Col>
           <ListGroup style={{ display: "block" }}>
             <ListGroup.Item style={{ minHeight: 41 }}>
-              {data.username}
+              {userData.userData.username}
             </ListGroup.Item>
             <ListGroup.Item style={{ minHeight: 41 }}>
-              {data.email}
+              {userData.userData.email}
             </ListGroup.Item>
             <ListGroup.Item style={{ minHeight: 41 }}>
-              {data.password}
+              {userData.userData.password}
             </ListGroup.Item>
             <ListGroup.Item style={{ minHeight: 41 }}>
-              {data.firstname}
+              {userData.userData.name.firstname}
             </ListGroup.Item>
             <ListGroup.Item style={{ minHeight: 41 }}>
-              {data.lastname}
+              {userData.userData.name.lastname}
             </ListGroup.Item>
             <ListGroup.Item style={{ minHeight: 41 }}></ListGroup.Item>
             <ListGroup.Item style={{ minHeight: 41 }}>
-              {data.city}
+              {userData.userData.address.city}
             </ListGroup.Item>
             <ListGroup.Item style={{ minHeight: 41 }}>
-              {data.street}
+              {userData.userData.address.street}
             </ListGroup.Item>
             <ListGroup.Item style={{ minHeight: 41 }}>
-              {data.number}
+              {userData.userData.address.number}
             </ListGroup.Item>
             <ListGroup.Item style={{ minHeight: 41 }}>
-              {data.zipcode}
+              {userData.userData.address.zipcode}
             </ListGroup.Item>
             <ListGroup.Item style={{ minHeight: 41 }}>
-              {data.phone}
+              {userData.userData.phone}
             </ListGroup.Item>
           </ListGroup>
         </Col>
