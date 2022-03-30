@@ -8,23 +8,9 @@ import Cart from "./routes/Cart";
 import Login from "./routes/Login";
 import ProfilePage from "./routes/ProfilePage";
 import SignUp from "./routes/SignUp";
+import Admin from "./routes/Admin";
 
 function App() {
-  // function RequireAuth({ children }) {
-  //   let auth = useAuth();
-  //   let location = useLocation();
-
-  //   if (!auth.user) {
-  //     // Redirect them to the /login page, but save the current location they were
-  //     // trying to go to when they were redirected. This allows us to send them
-  //     // along to that page after they login, which is a nicer user experience
-  //     // than dropping them off on the home page.
-  //     return <Navigate to="/profile" state={{ from: location }} replace />;
-  //   }
-
-  //   return children;
-  // }
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -36,14 +22,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<SignUp />} />
-          <Route
-            path="/profile"
-            element={
-              // <RequireAuth>
-              <ProfilePage />
-              // </RequireAuth>
-            }
-          />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/admin" element={<Admin />} />
           <Route>404 Not Found!</Route>
         </Routes>
       </BrowserRouter>

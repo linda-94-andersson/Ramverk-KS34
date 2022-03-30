@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { Container, Row, Col, ListGroup } from "react-bootstrap";
-import { url } from "../apis/fakeStoreApi";
-import { ActionTypes } from "../redux/constans/action-types";
 import { Navigate } from "react-router-dom";
 import { getUser } from "../redux/actions/authActions";
+import { Button } from "bootstrap";
 
 function ProfilePage() {
   const dispatch = useDispatch();
@@ -13,6 +11,7 @@ function ProfilePage() {
   const userData = useSelector((state) => state.userData);
   console.log(sign, " Sign");
   console.log(userData, " userData");
+  console.log(userData.userData.role, " role");
 
   useEffect(() => {
     if (!sign.token) return;
@@ -84,6 +83,16 @@ function ProfilePage() {
           </Row>
         </Container>
       )}
+      <Container>
+        {!userData.userData.role.admin ? (
+          <>
+          </>
+        ) : (
+          <Link to="/admin">
+            <Button>Admin page</Button>
+          </Link>
+        )}
+      </Container>
     </>
   );
 }
