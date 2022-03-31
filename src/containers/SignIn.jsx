@@ -1,12 +1,28 @@
-import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { signIn } from "../redux/actions/authActions";
+import { getUserData } from "../redux/actions/authActions";
+import useAuth from "../hooks/useAuth";
 
 function SignIn() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const sign = useSelector((state) => state.signInOut);
+  const userData = useSelector((state) => state.userData);
+  const auth = useAuth();
+
+  useEffect(() => {
+    if (auth.isLoggedIn()) {
+      navigate("/profile");
+    }
+  }, [userData, sign]);
+
+  useEffect(() => {
+    if (!auth.hasToken()) return;
+    dispatch(getUserData(sign.token.userId));
+  }, [sign]);
 
   const [creds, setCreds] = useState({
     username: "",
@@ -21,8 +37,6 @@ function SignIn() {
       password: "",
     });
   };
-
-  if (sign.token) return <Navigate to="/profile" />;
 
   return (
     <div>

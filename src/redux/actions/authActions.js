@@ -1,10 +1,9 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { url } from "../../apis/fakeStoreApi";
 import { ActionTypes } from "../constans/action-types";
 
-export const signUp = (user) => (dispatch) => {
-    axios.post(`${url}/users`,
+export const signUp = (user) => async (dispatch) => {
+    const res = await axios.post(`${url}/users`,
         {
             email: 'email@gmail.com',
             username: user.username,
@@ -21,36 +20,28 @@ export const signUp = (user) => (dispatch) => {
                 zipcode: '11-11',
             },
             phone: '070-000-11-11',
-        }
-    )
-        .then((token) => {
-            localStorage.setItem("token", JSON.stringify(token.data));
-            console.log(token);
+        });
+    localStorage.setItem("token", JSON.stringify(res.data));
 
-            dispatch({
-                type: ActionTypes.AUTH_SIGN_UP,
-                token: token.data,
-            });
-        })
-        .catch((error) => {
-            console.log(error.response, " error signUp");
-        })
+    dispatch({
+        type: ActionTypes.AUTH_SIGN_UP,
+        token: res.data,
+    });
+    console.log(res.data, " res signUp");
 }
 
-export const signIn = (creds) => (dispatch) => {
-    axios.post(`${url}/auth/login`, creds)
-        .then((token) => {
-            localStorage.setItem("token", JSON.stringify(token.data));
 
-            dispatch({
-                type: ActionTypes.SIGN_IN,
-                token: token.data,
-            });
-        })
-        .catch((error) => {
-            console.log(error.response, " error signIn");
-        })
+export const signIn = (creds) => async (dispatch) => {
+    const res = await axios.post(`${url}/auth/login`, creds);
+    localStorage.setItem("token", JSON.stringify(res.data));
+
+    dispatch({
+        type: ActionTypes.SIGN_IN,
+        token: res.data,
+    });
+    console.log(res.data, " res signIn")
 }
+
 
 export const singOut = () => {
     return (dispatch) => {
@@ -60,30 +51,94 @@ export const singOut = () => {
     }
 }
 
-export const getUser = (userId) => (dispatch) => {
-    axios.get(`${url}/users/${userId}`)
-        .then((res) => {
-            localStorage.setItem("user", JSON.stringify(res.data));
-            dispatch({
-                type: ActionTypes.GET_USERDATA,
-                userData: res.data,
-            });
-            console.log(res.data, " res")
-        })
-        .catch((error) => {
-            console.log(error, "allError");
-        });
+export const getUserData = (userId) => async (dispatch) => {
+    const res = await axios.get(`${url}/users/${userId}`);
+    localStorage.setItem("user", JSON.stringify(res.data));
+    dispatch({
+        type: ActionTypes.GET_USERDATA,
+        userData: res.data,
+    });
+    console.log(res.data, " res getUserData")
 }
 
+
 export const getAllUsers = () => async (dispatch) => {
-    const users = await axios.get(`${url}/users`);
+    const res = await axios.get(`${url}/users`);
     dispatch({
         type: ActionTypes.GET_ALL_USERS,
-        users: users.data,
+        users: res.data,
     });
+    console.log(res.data, " res getAllUsers")
 }
 
 // Lindas barve attemnts that failed
+// export const signUp1 = (user) => (dispatch) => {
+//     axios.post(`${url}/users`,
+//         {
+//             email: 'email@gmail.com',
+//             username: user.username,
+//             password: user.password,
+//             role: '',
+//             name: {
+//                 firstname: 'firstname',
+//                 lastname: 'lastname',
+//             },
+//             address: {
+//                 city: 'stockholm',
+//                 street: 'gatan',
+//                 number: 1,
+//                 zipcode: '11-11',
+//             },
+//             phone: '070-000-11-11',
+//         }
+//     )
+//         .then((token) => {
+//             localStorage.setItem("token", JSON.stringify(token.data));
+//             console.log(token);
+
+//             dispatch({
+//                 type: ActionTypes.AUTH_SIGN_UP,
+//                 token: token.data,
+//             });
+//         })
+//         .catch((error) => {
+//             console.log(error.response, " error signUp");
+//         })
+// }
+
+
+// export const signIn1 = (creds) => (dispatch) => {
+//     axios.post(`${url}/auth/login`, creds)
+//         .then((token) => {
+//             localStorage.setItem("token", JSON.stringify(token.data));
+
+//             dispatch({
+//                 type: ActionTypes.SIGN_IN,
+//                 token: token.data,
+//             });
+//         })
+//         .catch((error) => {
+//             console.log(error.response, " error signIn");
+//         })
+// }
+
+
+// export const getUser1 = (userId) => (dispatch) => {
+//     axios.get(`${url}/users/${userId}`)
+//         .then((res) => {
+//             localStorage.setItem("user", JSON.stringify(res.data));
+//             dispatch({
+//                 type: ActionTypes.GET_USERDATA,
+//                 userData: res.data,
+//             });
+//             console.log(res.data, " res")
+//         })
+//         .catch((error) => {
+//             console.log(error, "allError");
+//         });
+// }
+
+
 // export const getAllUsers2 = () => {
 //     return async function (dispatch) {
 //         const users = await axios.get(`${url}/users`);

@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../redux/actions/productActions";
 import { Button, Card, Carousel } from "react-bootstrap";
 import { CartState } from "../redux/context/Context";
 
 function HomePage() {
   const products = useSelector((state) => state.allProducts.products);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
 
   const {
     filterState: { searchQuery },

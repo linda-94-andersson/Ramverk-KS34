@@ -1,28 +1,25 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Container, Row, Col, ListGroup } from "react-bootstrap";
-import { Navigate, Link } from "react-router-dom";
-import { getUser } from "../redux/actions/authActions";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import useAuth from "../hooks/useAuth";
 
 function ProfilePage() {
-  const dispatch = useDispatch();
-  const sign = useSelector((state) => state.signInOut);
+  const navigate = useNavigate();
   const userData = useSelector((state) => state.userData);
-  console.log(sign, " Sign");
-  console.log(userData, " userData");
-  console.log(userData.userData.role, " role");
+  const sign = useSelector((state) => state.signInOut);
+  const auth = useAuth();
 
-  // useEffect(() => {
-  //   if (!sign.token) return;
-  //   dispatch(getUser(sign.token.userId));
-  // }, [sign]);
-
-  if (!sign.token) return <Navigate to="/login" />;
+  useEffect(() => {
+    if (!auth.isLoggedIn()) {
+      navigate("/login");
+    }
+  }, [userData, sign]);
 
   return (
     <>
-      {!userData.userData ? (
+      {!auth.hasUserData() ? (
         <div>Loading...</div>
       ) : (
         <Container style={{ marginTop: 40 }}>
@@ -81,18 +78,19 @@ function ProfilePage() {
               </ListGroup.Item>
             </Col>
           </Row>
+          <Container>
+            {!auth.isAdmin() ? (
+              <></>
+            ) : (
+              <Link to="/admin">
+                <Button variant="dark" style={{ marginTop: 40 }}>
+                  Admin page
+                </Button>
+              </Link>
+            )}
+          </Container>
         </Container>
       )}
-      <Container>
-        {userData.userData.role !== "admin" ? (
-          <>
-          </>
-        ) : (
-          <Link to="/admin">
-            <Button variant="dark" style={{marginTop: 40}}>Admin page</Button>
-          </Link>
-        )}
-      </Container>
     </>
   );
 }
