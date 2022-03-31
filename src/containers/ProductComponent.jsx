@@ -32,7 +32,7 @@ const ProductComponent = () => {
   } = CartState();
 
   const transformProducts = () => {
-    let sortedProducts = products;
+    let sortedProducts = [...products];
     if (sort) {
       sortedProducts = sortedProducts.sort((a, b) =>
         sort === "lowToHigh" ? a.price - b.price : b.price - a.price

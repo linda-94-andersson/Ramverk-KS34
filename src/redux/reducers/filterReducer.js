@@ -12,7 +12,7 @@ export const filterReducer = (state = initialState, action) => {
         case ActionTypes.FILTER_BY_SEARCH:
             return { ...state, searchQuery: action.payload };
         case ActionTypes.CLEAR_FILTERS:
-            return {};
+            return { ...state, sort: null };
         case ActionTypes.SORT_BY_CATEGORY:
             return { ...state, sortByCATE: action.payload };
         default:
