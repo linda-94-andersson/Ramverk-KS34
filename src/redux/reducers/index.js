@@ -6,6 +6,7 @@ import authReducer from "./authReducer";
 import signInOutReducer from "./signInOutReducer";
 import userDataReducer from "./userDataReducer";
 import allUsersReducer from "./allUsersReducer";
+import { getCateReducer } from "./getCateReducer";
 
 const reducers = combineReducers({
     allProducts: productReducer,
@@ -16,6 +17,7 @@ const reducers = combineReducers({
     signInOut: signInOutReducer,
     userData: userDataReducer,
     allUsers: allUsersReducer,
+    getAllCate: getCateReducer,
 });
 
 export default reducers; 

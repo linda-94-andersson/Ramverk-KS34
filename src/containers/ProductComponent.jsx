@@ -27,7 +27,7 @@ const ProductComponent = () => {
 
   const {
     state: { cart },
-    filterState: { sort, searchQuery },
+    filterState: { sort, searchQuery, sortByCATE },
     cartDispatch,
   } = CartState();
 
@@ -36,6 +36,12 @@ const ProductComponent = () => {
     if (sort) {
       sortedProducts = sortedProducts.sort((a, b) =>
         sort === "lowToHigh" ? a.price - b.price : b.price - a.price
+      );
+    }
+
+    if (sortByCATE.length > 0) {
+      sortedProducts = sortedProducts.filter((product) =>
+        sortByCATE.includes(product.category)
       );
     }
 

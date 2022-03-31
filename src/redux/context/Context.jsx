@@ -8,6 +8,7 @@ const Cart = createContext();
 
 const Context = ({ children }) => {
   const dispatchRedux = useDispatch();
+
   useEffect(() => {
     dispatchRedux(fetchProducts());
   }, []);
@@ -33,13 +34,11 @@ const Context = ({ children }) => {
 
   const [filterState, filterDispatch] = useReducer(filterReducer, {
     searchQuery: "",
-    sortByCATE: "",
+    sortByCATE: [],
   });
 
   return (
-    <Cart.Provider
-      value={{ state, cartDispatch, filterState, filterDispatch }}
-    >
+    <Cart.Provider value={{ state, cartDispatch, filterState, filterDispatch }}>
       {children}
     </Cart.Provider>
   );

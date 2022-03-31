@@ -22,13 +22,10 @@ const Header = () => {
   } = CartState();
 
   const sign = useSelector((state) => state.signInOut);
-
-  const history = useNavigate();
   const dispatch = useDispatch();
 
   const handleSignOut = () => {
     dispatch(singOut());
-    history("/login");
   };
 
   return (

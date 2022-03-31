@@ -2,7 +2,7 @@ import { ActionTypes } from "../constans/action-types";
 
 const initialState = {
     searchQuery: "",
-    sortByCATE: "",
+    sortByCATE: [],
 };
 
 export const filterReducer = (state = initialState, action) => {
@@ -12,7 +12,7 @@ export const filterReducer = (state = initialState, action) => {
         case ActionTypes.FILTER_BY_SEARCH:
             return { ...state, searchQuery: action.payload };
         case ActionTypes.CLEAR_FILTERS:
-            return { ...state, sort: null };
+            return { ...state, sort: null, sortByCATE: [], };
         case ActionTypes.SORT_BY_CATEGORY:
             return { ...state, sortByCATE: action.payload };
         default:

@@ -1,4 +1,6 @@
 import fakeStoreApi from "../../apis/fakeStoreApi";
+import axios from "axios";
+import { url } from "../../apis/fakeStoreApi";
 import { ActionTypes } from "../constans/action-types"
 
 export const fetchProducts = () => async (dispatch) => {
@@ -32,3 +34,12 @@ export const removeSelectedProduct = () => {
         type: ActionTypes.REMOVE_SELECTED_PRODUCT
     };
 };
+
+export const getAllCate = () => async (dispatch) => {
+    const res = await axios.get(`${url}/products/categories`);
+    dispatch({
+        type: ActionTypes.GET_CATEGORY,
+        payload: res.data,
+    });
+    console.log(res, " res allCate");
+}

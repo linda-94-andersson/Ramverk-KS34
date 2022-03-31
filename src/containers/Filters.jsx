@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { CartState } from "../redux/context/Context";
+import { getAllCate } from "../redux/actions/productActions";
 
 const Filters = () => {
   const {
-    filterState: { sort },
+    filterState: { sort, sortByCATE },
     filterDispatch,
   } = CartState();
 
-  const refresh = () => {
-    // it re-renders the site, dont have a better solution yet
-    window.location.reload();
-  };
+  const dispatch = useDispatch();
+  const getCate = useSelector((state) => state.getAllCate);
+
+  useEffect(() => {
+    dispatch(getAllCate());
+  }, []);
 
   return (
     <div className="filters">
@@ -51,6 +55,33 @@ const Filters = () => {
             checked={sort === "highToLow"}
           />
         </span>
+
+        {getCate.getCate.map((cate) => {
+          return (
+            <span key={cate}>
+              <Form.Check
+                style={{ padding: 10, textTransform: "capitalize" }}
+                label={cate}
+                name="group2"
+                type="checkbox"
+                onChange={() => {
+                  const index = sortByCATE.indexOf(cate);
+                  filterDispatch({
+                    type: "SORT_BY_CATEGORY",
+                    payload:
+                      index < 0
+                        ? [...sortByCATE, cate]
+                        : [
+                            ...sortByCATE.slice(0, index),
+                            ...sortByCATE.slice(index + 1),
+                          ],
+                  });
+                }}
+                checked={sortByCATE.includes(cate)}
+              />
+            </span>
+          );
+        })}
       </span>
       <Button
         variant="light"
