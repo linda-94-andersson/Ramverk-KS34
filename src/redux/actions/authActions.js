@@ -5,23 +5,22 @@ import { ActionTypes } from "../constans/action-types";
 export const signUp = (user) => async (dispatch) => {
     const res = await axios.post(`${url}/users`,
         {
-            email: 'email@gmail.com',
+            email: user.email,
             username: user.username,
             password: user.password,
             role: '',
             name: {
-                firstname: 'firstname',
-                lastname: 'lastname',
+                firstname: user.firstname,
+                lastname: user.lastname,
             },
             address: {
-                city: 'stockholm',
-                street: 'gatan',
-                number: 1,
-                zipcode: '11-11',
+                city: user.city,
+                street: user.street,
+                number: user.number,
+                zipcode: user.zipcode,
             },
-            phone: '070-000-11-11',
+            phone: user.phone,
         });
-    localStorage.setItem("token", JSON.stringify(res.data));
 
     dispatch({
         type: ActionTypes.AUTH_SIGN_UP,

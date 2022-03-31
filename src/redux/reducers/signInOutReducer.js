@@ -10,7 +10,6 @@ const signInOutReducer = (state = initialState, action) => {
             return { ...initialState, token: action.token };
         case ActionTypes.SIGN_OUT:
             localStorage.removeItem("token");
-            localStorage.removeItem("user");
             return { token: null, username: null, _id: null, };
         default:
             return state;
