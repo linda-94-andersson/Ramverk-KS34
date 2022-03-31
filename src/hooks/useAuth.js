@@ -10,7 +10,7 @@ function useAuth() {
   }
 
   const hasUserData = () => {
-    return Boolean(userData.userData)
+    return Boolean(userData)
   }
 
   const isLoggedIn = () => {
@@ -18,7 +18,7 @@ function useAuth() {
   };
 
   const isAdmin = () => {
-    return isLoggedIn() && userData.userData.role === "admin";
+    return isLoggedIn() && userData.role === "admin";
   }
 
   return { isLoggedIn, hasToken, hasUserData, isAdmin };

@@ -60,6 +60,32 @@ export const getUserData = (userId) => async (dispatch) => {
     console.log(res.data, " res getUserData")
 }
 
+export const updateUserData = (userId,up)  => async (dispatch) => {
+    const res = await axios.patch(`${url}/users/${userId}`, {
+        email: up.email,
+        username: up.username,
+        password: up.password,
+        role: '',
+        name: {
+            firstname: up.firstname,
+            lastname: up.lastname,
+        },
+        address: {
+            city: up.city,
+            street: up.street,
+            number: up.number,
+            zipcode: up.zipcode,
+        },
+        phone: up.phone,
+    });
+
+    dispatch({
+        type: ActionTypes.UPDATE_USERDATA,
+        upData: res.data,
+    });
+    console.log(res, " res updateUserData");
+}
+
 
 export const getAllUsers = () => async (dispatch) => {
     const res = await axios.get(`${url}/users`);
