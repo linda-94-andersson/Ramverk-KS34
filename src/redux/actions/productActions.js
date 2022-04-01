@@ -5,13 +5,19 @@ import { ActionTypes } from "../constans/action-types"
 
 export const fetchProducts = () => async (dispatch) => {
     const response = await fakeStoreApi.get("/products");
-    dispatch({ type: ActionTypes.FETCH_PRODUCTS, payload: response.data });
+    dispatch({
+        type: ActionTypes.FETCH_PRODUCTS,
+        payload: response.data
+    });
     console.log(response, " res all fetchProducts");
 };
 
 export const fetchProduct = (id) => async (dispatch) => {
     const response = await fakeStoreApi.get(`/products/${id}`);
-    dispatch({ type: ActionTypes.SELECTED_PRODUCT, payload: response.data });
+    dispatch({
+        type: ActionTypes.SELECTED_PRODUCT,
+        payload: response.data
+    });
     console.log(response, " res single fetchProduct");
 };
 
@@ -42,4 +48,13 @@ export const getAllCate = () => async (dispatch) => {
         payload: res.data,
     });
     console.log(res, " res allCate");
+}
+
+export const getCarts = () => async (dispatch) => {
+    const res = await axios.get(`${url}/carts`);
+    dispatch({
+        type: ActionTypes.GET_CARTS,
+        getCarts: res.data,
+    });
+    console.log(res.data, " res fetchCarts");
 }

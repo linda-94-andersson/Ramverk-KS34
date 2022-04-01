@@ -20,7 +20,7 @@ function ProfilePage() {
   }, [userData, sign]);
 
   useEffect(() => {
-    console.log(userData, " userDAta");
+    // console.log(userData, " userDAta");
   }, [userData]);
 
   const [dataUp, setDataUp] = useState({

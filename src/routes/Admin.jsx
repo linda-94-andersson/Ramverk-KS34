@@ -1,18 +1,29 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Col, Container, ListGroup, Row, Card, Button } from "react-bootstrap";
+import {
+  Col,
+  Container,
+  ListGroup,
+  Row,
+  Card,
+  Button,
+  Form,
+} from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
 import { getAllUsers } from "../redux/actions/authActions";
+import { getCarts } from "../redux/actions/productActions";
 
 function Admin() {
   const products = useSelector((state) => state.allProducts.products);
   const allUsers = useSelector((state) => state.allUsers.users);
+  const getAllCarts = useSelector((state) => state.allCarts.getCarts);
   const auth = useAuth();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllUsers());
+    dispatch(getCarts());
   }, []);
 
   const renderProducts = () => {
@@ -32,17 +43,23 @@ function Admin() {
                   alt={title}
                 />
                 <Card.Body style={{ display: "inline" }}>
-                  <Card.Title>
-                    <h2 style={{ fontSize: 15 }}>{title}</h2>
-                  </Card.Title>
-                  <Card.Subtitle>
-                    <h3 style={{ fontSize: 15, display: "inline", padding: 5 }}>
-                      ${price}
-                    </h3>
-                    <h4 style={{ fontSize: 15, display: "inline", padding: 5 }}>
-                      {category}
-                    </h4>
-                  </Card.Subtitle>
+                  <Form>
+                    <Form.Group>
+                      <Card.Title>
+                        <Form.Control type="text" value={title} />
+                      </Card.Title>
+                      <Card.Subtitle style={{ margin: 5 }}>
+                        <Form.Control type="text" value={"$" + price} />
+                        <Form.Control type="text" value={category} />
+                      </Card.Subtitle>
+                    </Form.Group>
+                    <Button variant="dark" style={{ margin: 5 }}>
+                      UPDATE PRODUCT
+                    </Button>
+                    <Button variant="dark" style={{ margin: 5 }}>
+                      DELETE PRODUCT!
+                    </Button>
+                  </Form>
                 </Card.Body>
               </Card>
             </Container>
@@ -55,7 +72,7 @@ function Admin() {
   const renderUsers = () => {
     if (!allUsers) return <div>Loading users...</div>;
     return allUsers.map((user) => {
-      const { id, email, username, password } = user;
+      const { id, email, username, password, name } = user;
       return (
         <section key={id}>
           {Object.keys(user).length === 0 ? (
@@ -67,9 +84,37 @@ function Admin() {
                   <span style={{ marginLeft: 10 }}>{email}</span>,
                   <span style={{ marginLeft: 10 }}>{username}</span>,
                   <span style={{ marginLeft: 10 }}>{password}</span>
+                  <span style={{ marginLeft: 10 }}>{name.firstname}</span>
                 </ListGroup.Item>
               </ListGroup>
             </Container>
+          )}
+        </section>
+      );
+    });
+  };
+
+
+  const renderCarts = () => {
+    if (getAllCarts) return <div>Loading carts...</div>;
+    return getAllCarts.map((cart) => {
+      const { id, userId, date } = cart;
+      return (
+        <section key={id}>
+          {Object.keys(cart).length === 0 ? (
+            <div>...loading</div>
+          ) : (
+            <>
+              {Object.entries(cart)}
+
+              <Container>
+                <ListGroup>
+                  <ListGroup.Item>
+                    {"User: "+{userId}}, {date},{"Product: "},
+                  </ListGroup.Item>
+                </ListGroup>
+              </Container>
+            </>
           )}
         </section>
       );
@@ -106,6 +151,7 @@ function Admin() {
             <Row>
               <Col>All products</Col>
               <Col>All users</Col>
+              <Col>Carts</Col>
             </Row>
             <Row>
               <Col>
@@ -116,6 +162,11 @@ function Admin() {
               <Col>
                 <ListGroup style={{ display: "block" }}>
                   <ListGroup.Item>{renderUsers()}</ListGroup.Item>
+                </ListGroup>
+              </Col>
+              <Col>
+                <ListGroup style={{ display: "block" }}>
+                  <ListGroup.Item>CART GOES HERE{renderCarts()}</ListGroup.Item>
                 </ListGroup>
               </Col>
             </Row>

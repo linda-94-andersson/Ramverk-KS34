@@ -18,4 +18,5 @@ export const ActionTypes = {
     GET_ALL_USERS: "GET_ALL_USERS",
     GET_CATEGORY: "GET_CATEGORY",
     UPDATE_USERDATA: "UPDATE_USERDATA",
+    GET_CARTS: "GET_CARTS",
 };
