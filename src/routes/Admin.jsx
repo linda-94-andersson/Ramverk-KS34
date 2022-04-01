@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Col,
@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
 import { getAllUsers } from "../redux/actions/authActions";
-import { getCarts } from "../redux/actions/productActions";
+import { getCarts, deleteProd } from "../redux/actions/productActions";
 
 function Admin() {
   const products = useSelector((state) => state.allProducts.products);
@@ -25,6 +25,15 @@ function Admin() {
     dispatch(getAllUsers());
     dispatch(getCarts());
   }, []);
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(deleteProd(products.id));
+  };
 
   const renderProducts = () => {
     if (!products) return <div>Loading products...</div>;
@@ -43,7 +52,7 @@ function Admin() {
                   alt={title}
                 />
                 <Card.Body style={{ display: "inline" }}>
-                  <Form>
+                  <Form onChange={handleUpdate} onSubmit={handleSubmit}>
                     <Form.Group>
                       <Card.Title>
                         <Form.Control type="text" value={title} />
@@ -53,10 +62,20 @@ function Admin() {
                         <Form.Control type="text" value={category} />
                       </Card.Subtitle>
                     </Form.Group>
-                    <Button variant="dark" style={{ margin: 5 }}>
+                    <Button
+                      variant="dark"
+                      style={{ margin: 5 }}
+                      type="submit"
+                      onClick={handleUpdate}
+                    >
                       UPDATE PRODUCT
                     </Button>
-                    <Button variant="dark" style={{ margin: 5 }}>
+                    <Button
+                      variant="dark"
+                      style={{ margin: 5 }}
+                      type="submit"
+                      onClick={handleSubmit}
+                    >
                       DELETE PRODUCT!
                     </Button>
                   </Form>
@@ -94,14 +113,13 @@ function Admin() {
     });
   };
 
-
   const renderCarts = () => {
-    if (getAllCarts) return <div>Loading carts...</div>;
+    if (!getAllCarts) return <div>Loading carts...</div>;
     return getAllCarts.map((cart) => {
       const { id, userId, date } = cart;
       return (
         <section key={id}>
-          {Object.keys(cart).length === 0 ? (
+          {/* {Object.keys(cart).length === 0 ? (
             <div>...loading</div>
           ) : (
             <>
@@ -115,7 +133,7 @@ function Admin() {
                 </ListGroup>
               </Container>
             </>
-          )}
+          )} */}
         </section>
       );
     });

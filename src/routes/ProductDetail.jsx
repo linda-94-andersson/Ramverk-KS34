@@ -25,7 +25,7 @@ const ProductDetail = () => {
     state: { cart, qty },
     cartDispatch,
   } = CartState();
-  
+
   return (
     <div>
       {Object.keys(product).length === 0 ? (
@@ -33,7 +33,7 @@ const ProductDetail = () => {
       ) : (
         <div className="item-detail" key={id}>
           <Card>
-            <Card.Img variant="top" src={image} alt={title}  />
+            <Card.Img variant="top" src={image} alt={title} />
             <Card.Body>
               <Card.Title>
                 <h1>{title}</h1>
