@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Col,
@@ -12,7 +12,12 @@ import {
 } from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
 import { getAllUsers } from "../redux/actions/authActions";
-import { getCarts, deleteProd } from "../redux/actions/productActions";
+import {
+  deleteProd,
+  getCarts,
+  updateProductData,
+} from "../redux/actions/productActions";
+import { replaceItemAtIndex, removeItemAtIndex } from "../utils";
 
 function Admin() {
   const products = useSelector((state) => state.allProducts.products);
@@ -20,25 +25,47 @@ function Admin() {
   const getAllCarts = useSelector((state) => state.allCarts.getCarts);
   const auth = useAuth();
   const dispatch = useDispatch();
+  const [prodData, setProdData] = useState([]);
 
   useEffect(() => {
     dispatch(getAllUsers());
     dispatch(getCarts());
   }, []);
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
+  const handleUpdate = (product, key, value) => {
+    const i = prodData.findIndex((prod) => {
+      return prod.id === product.id;
+    });
+    if (i < 0) {
+      setProdData([...prodData, { ...product, [key]: value }]);
+      return;
+    }
+    setProdData(
+      replaceItemAtIndex(prodData, i, { ...prodData[i], [key]: value })
+    );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, productId) => {
     e.preventDefault();
-    dispatch(deleteProd(products.id));
+    const i = prodData.findIndex((prod) => prod.id === productId);
+    if (i < 0) {
+      return;
+    }
+    dispatch(updateProductData(prodData[i]));
+    setProdData(removeItemAtIndex(prodData, i));
+  };
+
+  const handleDel = (id) => {
+    dispatch(deleteProd(id));
   };
 
   const renderProducts = () => {
-    if (!products) return <div>Loading products...</div>;
+    if (!products.length) return <div>Loading products...</div>;
     return products.map((product) => {
-      const { id, title, image, price, category } = product;
+      const data = prodData.find((prod) => {
+        return prod.id === product.id;
+      });
+      const { id, title, image, price, category } = data || product;
       return (
         <section key={id}>
           {Object.keys(product).length === 0 ? (
@@ -52,29 +79,42 @@ function Admin() {
                   alt={title}
                 />
                 <Card.Body style={{ display: "inline" }}>
-                  <Form onChange={handleUpdate} onSubmit={handleSubmit}>
+                  <Form onSubmit={(e) => handleSubmit(e, id)}>
                     <Form.Group>
                       <Card.Title>
-                        <Form.Control type="text" value={title} />
+                        <Form.Control
+                          type="text"
+                          value={title}
+                          onChange={(e) =>
+                            handleUpdate(product, "title", e.target.value)
+                          }
+                        />
                       </Card.Title>
                       <Card.Subtitle style={{ margin: 5 }}>
-                        <Form.Control type="text" value={"$" + price} />
-                        <Form.Control type="text" value={category} />
+                        <Form.Control
+                          type="text"
+                          value={price}
+                          onChange={(e) =>
+                            handleUpdate(product, "price", e.target.value)
+                          }
+                        />
+                        <Form.Control
+                          type="text"
+                          value={category}
+                          onChange={(e) =>
+                            handleUpdate(product, "category", e.target.value)
+                          }
+                        />
                       </Card.Subtitle>
                     </Form.Group>
-                    <Button
-                      variant="dark"
-                      style={{ margin: 5 }}
-                      type="submit"
-                      onClick={handleUpdate}
-                    >
+                    <Button variant="dark" style={{ margin: 5 }} type="submit">
                       UPDATE PRODUCT
                     </Button>
                     <Button
                       variant="dark"
                       style={{ margin: 5 }}
-                      type="submit"
-                      onClick={handleSubmit}
+                      type="button"
+                      onClick={() => handleDel(id)}
                     >
                       DELETE PRODUCT!
                     </Button>
@@ -89,7 +129,7 @@ function Admin() {
   };
 
   const renderUsers = () => {
-    if (!allUsers) return <div>Loading users...</div>;
+    if (!allUsers.length) return <div>Loading users...</div>;
     return allUsers.map((user) => {
       const { id, email, username, password, name } = user;
       return (
@@ -102,8 +142,9 @@ function Admin() {
                 <ListGroup.Item>
                   <span style={{ marginLeft: 10 }}>{email}</span>,
                   <span style={{ marginLeft: 10 }}>{username}</span>,
-                  <span style={{ marginLeft: 10 }}>{password}</span>
+                  <span style={{ marginLeft: 10 }}>{password}</span>,
                   <span style={{ marginLeft: 10 }}>{name.firstname}</span>
+                  <span style={{ marginLeft: 10 }}>{name.lastname}</span>
                 </ListGroup.Item>
               </ListGroup>
             </Container>
@@ -114,26 +155,27 @@ function Admin() {
   };
 
   const renderCarts = () => {
-    if (!getAllCarts) return <div>Loading carts...</div>;
+    if (!getAllCarts.length) return <div>Loading carts...</div>;
     return getAllCarts.map((cart) => {
-      const { id, userId, date } = cart;
+      const { id, userId, date, products } = cart;
+      const user = allUsers.find((user) => user.id === userId);
       return (
         <section key={id}>
-          {/* {Object.keys(cart).length === 0 ? (
-            <div>...loading</div>
-          ) : (
-            <>
-              {Object.entries(cart)}
-
-              <Container>
-                <ListGroup>
-                  <ListGroup.Item>
-                    {"User: "+{userId}}, {date},{"Product: "},
-                  </ListGroup.Item>
-                </ListGroup>
-              </Container>
-            </>
-          )} */}
+          <Container>
+            <ListGroup>
+              <ListGroup.Item>
+                User: {!user ? userId : user.username}, {date},
+                {products.map(({ productId, quantity }) => {
+                  return (
+                    <span key={`cart-${id}-${productId}`}>
+                      {" "}
+                      Product: {productId}, Quantity: {quantity},
+                    </span>
+                  );
+                })}
+              </ListGroup.Item>
+            </ListGroup>
+          </Container>
         </section>
       );
     });
@@ -161,43 +203,33 @@ function Admin() {
     <Navigate to="/login" />
   ) : (
     <>
-      {allUsers === null ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          <Container>
-            <Row>
-              <Col>All products</Col>
-              <Col>All users</Col>
-              <Col>Carts</Col>
-            </Row>
-            <Row>
-              <Col>
-                <ListGroup style={{ display: "block" }}>
-                  {renderProducts()}
-                </ListGroup>
-              </Col>
-              <Col>
-                <ListGroup style={{ display: "block" }}>
-                  <ListGroup.Item>{renderUsers()}</ListGroup.Item>
-                </ListGroup>
-              </Col>
-              <Col>
-                <ListGroup style={{ display: "block" }}>
-                  <ListGroup.Item>CART GOES HERE{renderCarts()}</ListGroup.Item>
-                </ListGroup>
-              </Col>
-            </Row>
-            <Button
-              variant="dark"
-              className="back-to-top"
-              onClick={scrollToTop}
-            >
-              &#8679;
-            </Button>
-          </Container>
-        </>
-      )}
+      <Container>
+        <Row>
+          <Col>All products</Col>
+          <Col>All users</Col>
+          <Col>Carts</Col>
+        </Row>
+        <Row>
+          <Col>
+            <ListGroup style={{ display: "block" }}>
+              {renderProducts()}
+            </ListGroup>
+          </Col>
+          <Col>
+            <ListGroup style={{ display: "block" }}>
+              <ListGroup.Item>{renderUsers()}</ListGroup.Item>
+            </ListGroup>
+          </Col>
+          <Col>
+            <ListGroup style={{ display: "block" }}>
+              <ListGroup.Item>{renderCarts()}</ListGroup.Item>
+            </ListGroup>
+          </Col>
+        </Row>
+        <Button variant="dark" className="back-to-top" onClick={scrollToTop}>
+          &#8679;
+        </Button>
+      </Container>
     </>
   );
 }

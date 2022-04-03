@@ -105,7 +105,7 @@ function ProfilePage() {
                 <Form.Group
                   style={{ height: 38, marginBottom: 15, textAlign: "end" }}
                 >
-                  <Form.Label>Firtname</Form.Label>
+                  <Form.Label>Firstname</Form.Label>
                 </Form.Group>
                 <Form.Group
                   style={{ height: 38, marginBottom: 15, textAlign: "end" }}
@@ -113,7 +113,7 @@ function ProfilePage() {
                   <Form.Label>Lastname</Form.Label>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Text>Adress</Form.Text>
+                  <Form.Text>Address</Form.Text>
                 </Form.Group>
                 <Form.Group
                   style={{

@@ -60,19 +60,19 @@ export const getCarts = () => async (dispatch) => {
 }
 
 export const deleteProd = (id) => async (dispatch) => {
-    const res = await axios.delete(`/products/${id}`);
+    const res = await axios.delete(`${url}/products/${id}`);
     dispatch({
         type: ActionTypes.DELETE_PRODUCT,
-        delProd: res.data,
+        payload: res.data,
     });
     console.log(res, " res deleteProducts");
 }
 
-export const updateProductData = (id) => async (dispatch) => {
-    const res = await axios.patch(`/products/${id}`);
+export const updateProductData = (data) => async (dispatch) => {
+    const res = await axios.patch(`${url}/products/${data.id}`, data);
     dispatch({
         type: ActionTypes.UPDATE_PRODUCT,
-        upProdData: res.data,
+        payload: res.data,
     });
     console.log(res, " res updateProductData");
 }

@@ -1,6 +1,6 @@
 import { ActionTypes } from "../constans/action-types";
 
-const allUsersReducer = (state = {}, action) => {
+const allUsersReducer = (state = { users: [] }, action) => {
     switch (action.type) {
         case ActionTypes.GET_ALL_USERS:
             return { ...state, users: action.users };
