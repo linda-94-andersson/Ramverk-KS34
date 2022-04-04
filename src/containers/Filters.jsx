@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Container } from "react-bootstrap";
 import { CartState } from "../redux/context/Context";
 import { getAllCate } from "../redux/actions/productActions";
+import { ActionTypes } from "../redux/constans/action-types";
 
 const Filters = () => {
   const {
@@ -18,9 +19,20 @@ const Filters = () => {
   }, []);
 
   return (
-    <div className="filters">
-      <span className="title">Filter Products</span>
-      <span className="filter-items">
+    <Container
+      style={{
+        backgroundColor: "#343a40",
+        color: "white",
+        padding: 30,
+        display: "flex",
+        flexDirection: "column",
+        width: "15%",
+      }}
+    >
+      <span style={{ fontSize: 30, textTransform: "uppercase" }}>
+        Filter Products
+      </span>
+      <span style={{ padding: 20 }}>
         <span>
           <Form.Check
             style={{ padding: 10 }}
@@ -31,7 +43,7 @@ const Filters = () => {
             id={`inline-1`}
             onChange={() =>
               filterDispatch({
-                type: "SORT_BY_PRICE",
+                type: ActionTypes.SORT_BY_PRICE,
                 payload: "lowToHigh",
               })
             }
@@ -48,7 +60,7 @@ const Filters = () => {
             id={`inline-2`}
             onChange={() =>
               filterDispatch({
-                type: "SORT_BY_PRICE",
+                type: ActionTypes.SORT_BY_PRICE,
                 payload: "highToLow",
               })
             }
@@ -67,7 +79,7 @@ const Filters = () => {
                 onChange={() => {
                   const index = sortByCATE.indexOf(cate);
                   filterDispatch({
-                    type: "SORT_BY_CATEGORY",
+                    type: ActionTypes.SORT_BY_CATEGORY,
                     payload:
                       index < 0
                         ? [...sortByCATE, cate]
@@ -87,13 +99,13 @@ const Filters = () => {
         variant="light"
         onClick={() => {
           filterDispatch({
-            type: "CLEAR_FILTERS",
+            type: ActionTypes.CLEAR_FILTERS,
           });
         }}
       >
         Clear Filters
       </Button>
-    </div>
+    </Container>
   );
 };
 

@@ -16,7 +16,9 @@ function Login() {
             Sign up right here &#8594;
           </span>
           <Link to="/register">
-            <Button variant="dark" style={{marginLeft: 7}}>Register today!</Button>
+            <Button variant="dark" style={{ marginLeft: 7 }}>
+              Register today!
+            </Button>
           </Link>
         </Col>
       </Row>

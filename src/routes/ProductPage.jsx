@@ -4,9 +4,17 @@ import ProductComponent from "../containers/ProductComponent";
 
 const ProductPage = () => {
   return (
-    <div className="product-page">
+    <div style={{ display: "flex" }}>
       <Filters />
-      <div className="filter-container">
+      <div
+        style={{
+          display: "flex",
+          width: "78%",
+          padding: "0px 20px",
+          flexWrap: "wrap",
+          justifyContent: "space-around",
+        }}
+      >
         <ProductComponent />
       </div>
     </div>

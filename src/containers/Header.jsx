@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Badge,
@@ -10,9 +10,10 @@ import {
   Dropdown,
   Button,
 } from "react-bootstrap";
-import { CartState } from "../redux/context/Context";
 import { AiFillDelete } from "react-icons/ai";
+import { CartState } from "../redux/context/Context";
 import { singOut } from "../redux/actions/authActions";
+import { ActionTypes } from "../redux/constans/action-types";
 
 const Header = () => {
   const {
@@ -54,7 +55,7 @@ const Header = () => {
                 aria-label="Search"
                 onChange={(e) => {
                   filterDispatch({
-                    type: "FILTER_BY_SEARCH",
+                    type: ActionTypes.FILTER_BY_SEARCH,
                     payload: e.target.value,
                   });
                 }}
@@ -64,17 +65,17 @@ const Header = () => {
           <Nav className="me-auto">
             <Nav style={{ padding: 5 }}>
               <Link to="/">
-                <span className="nav">Home</span>
+                <span style={{ color: "white" }}>Home</span>
               </Link>
             </Nav>
             <Nav style={{ padding: 5 }}>
               <Link to="/products">
-                <span className="nav">Products</span>
+                <span style={{ color: "white" }}>Products</span>
               </Link>
             </Nav>
             <Nav style={{ padding: 5 }}>
               <Link to="/cart">
-                <span className="nav">Go to Cart</span>
+                <span style={{ color: "white" }}>Go to Cart</span>
               </Link>
             </Nav>
             {useLocation().pathname.split("/")[1] !== "cart" && (
@@ -91,13 +92,33 @@ const Header = () => {
                   {cart.length > 0 ? (
                     <>
                       {cart.map((props) => (
-                        <span className="cartitem" key={props.id}>
+                        <span
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            margin: "0 20px",
+                            marginBottom: 20,
+                          }}
+                          key={props.id}
+                        >
                           <img
+                            style={{
+                              width: 50,
+                              heigth: 50,
+                              objectFit: "contain",
+                            }}
                             src={props.image}
-                            className="cartItemImg"
                             alt={props.title}
                           />
-                          <div className="cartItemDetail">
+                          <div
+                            style={{
+                              display: "flex",
+                              flex: 1,
+                              padding: "0px 20px",
+                              flexDirection: "column",
+                            }}
+                          >
                             <span>{props.title}</span>
                             <span>${props.price}</span>
                           </div>
@@ -106,7 +127,7 @@ const Header = () => {
                             style={{ cursor: "pointer" }}
                             onClick={() =>
                               cartDispatch({
-                                type: "REMOVE_FROM_CART",
+                                type: ActionTypes.REMOVE_FROM_CART,
                                 payload: props,
                               })
                             }

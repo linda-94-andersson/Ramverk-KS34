@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, Card, Container } from "react-bootstrap";
 import {
   fetchProduct,
   removeSelectedProduct,
 } from "../redux/actions/productActions";
 import { CartState } from "../redux/context/Context";
-import { Button, Card } from "react-bootstrap";
+import { ActionTypes } from "../redux/constans/action-types";
 
 const ProductDetail = () => {
   let product = useSelector((state) => state.product);
@@ -27,13 +28,21 @@ const ProductDetail = () => {
   } = CartState();
 
   return (
-    <div>
+    <>
       {Object.keys(product).length === 0 ? (
         <div>...Loading</div>
       ) : (
-        <div className="item-detail" key={id}>
+        <Container
+          style={{ padding: 20, display: "flex", width: "50vw" }}
+          key={id}
+        >
           <Card>
-            <Card.Img variant="top" src={image} alt={title} />
+            <Card.Img
+              variant="top"
+              style={{ width: "100%", objectFit: "contain", height: "50vh" }}
+              src={image}
+              alt={title}
+            />
             <Card.Body>
               <Card.Title>
                 <h1>{title}</h1>
@@ -45,10 +54,11 @@ const ProductDetail = () => {
                 <p>{description}</p>
               </Card.Subtitle>
               {cart.some((b) => b.id === id) ? (
+                <>
                 <Button
                   onClick={() => {
                     cartDispatch({
-                      type: "REMOVE_FROM_CART",
+                      type: ActionTypes.REMOVE_FROM_CART,
                       payload: product,
                     });
                   }}
@@ -56,12 +66,29 @@ const ProductDetail = () => {
                 >
                   Remove from cart
                 </Button>
+                 <Button
+                 style={{ width: 150, marginLeft: 20 }}
+                 value={qty}
+                 variant="dark"
+                 onClick={(e) => {
+                   cartDispatch({
+                     type: ActionTypes.ADD_TO_QTY,
+                     payload: {
+                       id: id,
+                       qty: e.target.value + 1,
+                     },
+                   });
+                 }}
+               >
+                 Add more +
+               </Button>
+               </>
               ) : (
                 <Button
                   variant="dark"
                   onClick={() => {
                     cartDispatch({
-                      type: "ADD_TO_CART",
+                      type: ActionTypes.ADD_TO_CART,
                       payload: product,
                     });
                   }}
@@ -69,27 +96,21 @@ const ProductDetail = () => {
                   Add to Cart
                 </Button>
               )}
-              <Button
-                style={{ width: 150, marginLeft: 20 }}
-                value={qty}
-                variant="dark"
-                onClick={(e) => {
-                  cartDispatch({
-                    type: "ADD_TO_QTY",
-                    payload: {
-                      id: id,
-                      qty: e.target.value + 1,
-                    },
-                  });
-                }}
-              >
-                Add more +
-              </Button>
+              <Link to="/cart">
+                <Button style={{ width: 150, marginLeft: 20 }} variant="dark">
+                  Go to cart
+                </Button>
+              </Link>
+              <Link to="/products">
+                <Button style={{ width: 150, marginLeft: 20 }} variant="dark">
+                  Back to products
+                </Button>
+              </Link>
             </Card.Body>
           </Card>
-        </div>
+        </Container>
       )}
-    </div>
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ import signInOutReducer from "./signInOutReducer";
 import userDataReducer from "./userDataReducer";
 import allUsersReducer from "./allUsersReducer";
 import { getCateReducer } from "./getCateReducer";
-import  getCartsReducer  from "./getCartsReducer";
+import getCartsReducer from "./getCartsReducer";
 
 const reducers = combineReducers({
     allProducts: productReducer,

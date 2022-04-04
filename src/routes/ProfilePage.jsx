@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
 import { updateUserData } from "../redux/actions/authActions";
 
@@ -18,10 +17,6 @@ function ProfilePage() {
       navigate("/login");
     }
   }, [userData, sign]);
-
-  useEffect(() => {
-    // console.log(userData, " userDAta");
-  }, [userData]);
 
   const [dataUp, setDataUp] = useState({
     username: "",
