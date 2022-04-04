@@ -21,7 +21,7 @@ function AdminAllUsers() {
           {Object.keys(user).length === 0 ? (
             <div>...Loading</div>
           ) : (
-            <Container style={{ width: "58.3vw" }}>
+            <Container style={{ width: "68.3vw" }}>
               <Table responsive striped bordered>
                 <thead>
                   <tr>
@@ -66,15 +66,21 @@ function AdminAllUsers() {
   return (
     <Row>
       <Col>
-        <Dropdown id="dropdown-basic" autoClose={false}>
+        <Dropdown
+          id="dropdown-basic"
+          autoClose={false}
+          style={{ cursor: "default" }}
+        >
           <Dropdown.Toggle
             variant="secondary"
-            style={{ width: "60vw", marginBottom: 10 }}
+            style={{ width: "70vw", marginBottom: 10 }}
           >
             All users
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item>{renderUsers()}</Dropdown.Item>
+            <Dropdown.Item style={{ cursor: "default" }}>
+              {renderUsers()}
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Col>

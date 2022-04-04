@@ -21,14 +21,13 @@ function AdminAllCarts() {
       const user = allUsers.find((user) => user.id === userId);
       return (
         <section key={id}>
-          <Container style={{ width: "58.3vw" }}>
+          <Container style={{ width: "68.3vw" }}>
             <Table responsive striped bordered>
               <thead>
                 <tr>
                   <th>ID</th>
                   <th>User</th>
                   <th>Date</th>
-                  <th>ProductId &amp; Quantity </th>
                 </tr>
               </thead>
               <tbody>
@@ -40,19 +39,27 @@ function AdminAllCarts() {
                   <td>
                     <span>{date}</span>
                   </td>
-                  {products.map(({ productId, quantity }) => {
-                    return (
-                      <div key={`cart-${id}-${productId}`}>
-                        <td>
-                          <span style={{ marginRight: 100 }}>{productId}</span>
-                        </td>
-                        <td>
-                          <span>{quantity}</span>
-                        </td>
-                      </div>
-                    );
-                  })}
                 </tr>
+              </tbody>
+              <thead>
+                <tr>
+                  <th>ProductId</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.map(({ productId, quantity }) => {
+                  return (
+                    <tr key={`cart-${id}-${productId}`}>
+                      <td>
+                        <span style={{ marginRight: 100 }}>{productId}</span>
+                      </td>
+                      <td>
+                        <span>{quantity}</span>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </Table>
           </Container>
@@ -64,15 +71,21 @@ function AdminAllCarts() {
   return (
     <Row>
       <Col>
-        <Dropdown id="dropdown-basic" autoClose={false}>
+        <Dropdown
+          id="dropdown-basic"
+          autoClose={false}
+          style={{ cursor: "default" }}
+        >
           <Dropdown.Toggle
             variant="secondary"
-            style={{ width: "60vw", marginBottom: 10 }}
+            style={{ width: "70vw", marginBottom: 10 }}
           >
             All carts
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item>{renderCarts()}</Dropdown.Item>
+            <Dropdown.Item style={{ cursor: "default" }}>
+              {renderCarts()}
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Col>

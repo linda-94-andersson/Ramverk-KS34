@@ -44,6 +44,7 @@ function SignIn() {
         <Form.Group className="mb-3" controlId="formBasicNameIn">
           <Form.Label>Your username</Form.Label>
           <Form.Control
+            style={{ minWidth: 150 }}
             type="name"
             placeholder="Enter username"
             value={creds.username}
@@ -53,6 +54,7 @@ function SignIn() {
         <Form.Group className="mb-3" controlId="formBasicPasswordIn">
           <Form.Label>Your password</Form.Label>
           <Form.Control
+            style={{ minWidth: 150 }}
             type="password"
             placeholder="Enter password"
             value={creds.password}

@@ -48,7 +48,7 @@ const ProductComponent = () => {
           <Container
             style={{
               backgroundColor: "rgba(226,224,228,0.322)",
-              width: 350,
+              maxWidth: 200,
               height: "94%",
               border: "1px soild rgba(0,0,0,0.164)",
               borderRadius: 5,
@@ -57,7 +57,7 @@ const ProductComponent = () => {
               margin: "20px 0px",
             }}
           >
-            <Card style={{ height: 550 }}>
+            <Card style={{ height: 650 }}>
               <Link to={`/product/${id}`}>
                 <Card.Img
                   style={{
@@ -65,15 +65,15 @@ const ProductComponent = () => {
                     height: "25vh",
                     display: "block",
                     objectFit: "contain",
-                    padding: 10,
+                    paddingRight: 25,
                   }}
                   src={image}
                   alt={title}
                 />
-                <Card.Body style={{ width: 300 }}>
+                <Card.Body style={{ width: 200 }}>
                   <Card.Title>
                     <h2
-                      style={{ margin: "10px 0px", fontSize: 19, height: 71 }}
+                      style={{ margin: "10px 0px", fontSize: 19, height: 171 }}
                     >
                       {title}
                     </h2>
@@ -106,7 +106,7 @@ const ProductComponent = () => {
                     style={{
                       fontSize: 18,
                       borderRadius: 5,
-                      width: 290,
+                      width: 150,
                       height: 40,
                       textTransform: "capitalize",
                       margin: "5px auto",
@@ -120,7 +120,7 @@ const ProductComponent = () => {
                     style={{
                       fontSize: 18,
                       borderRadius: 5,
-                      width: 290,
+                      width: 150,
                       height: 40,
                       textTransform: "capitalize",
                       margin: "5px auto",
@@ -133,7 +133,7 @@ const ProductComponent = () => {
                     }}
                     variant="danger"
                   >
-                    Remove from cart
+                    Remove
                   </Button>
                 ) : (
                   <Button
@@ -141,7 +141,7 @@ const ProductComponent = () => {
                     style={{
                       fontSize: 18,
                       borderRadius: 5,
-                      width: 290,
+                      width: 150,
                       height: 40,
                       textTransform: "capitalize",
                       margin: "5px auto",

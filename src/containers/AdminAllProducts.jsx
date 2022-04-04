@@ -56,7 +56,7 @@ function AdminAllProducts() {
           {Object.keys(product).length === 0 ? (
             <div>...Loading</div>
           ) : (
-            <Container style={{ width: "58.3vw" }}>
+            <Container style={{ width: "68.3vw" }}>
               <Card style={{ paddingTop: 5 }}>
                 <Card.Img
                   style={{ height: 100, objectFit: "contain" }}
@@ -100,7 +100,7 @@ function AdminAllProducts() {
                     </Button>
                     <Button
                       variant="dark"
-                      style={{ margin: 5 }}
+                      style={{ margin: 5, display: "block" }}
                       type="button"
                       onClick={() => handleDel(id)}
                     >
@@ -119,19 +119,24 @@ function AdminAllProducts() {
   return (
     <Row>
       <Col>
-        <Dropdown id="dropdown-basic" autoClose={false}>
+        <Dropdown
+          id="dropdown-basic"
+          autoClose={false}
+          style={{ cursor: "default" }}
+        >
           <Dropdown.Toggle
             variant="secondary"
-            style={{ width: "60vw", marginBottom: 10 }}
+            style={{ width: "70vw", marginBottom: 10 }}
           >
             All products
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item>{renderProducts()}</Dropdown.Item>
+            <Dropdown.Item style={{ cursor: "default" }}>
+              {renderProducts()}
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Col>
-      <Col></Col>
     </Row>
   );
 }

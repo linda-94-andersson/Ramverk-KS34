@@ -35,7 +35,7 @@ const Header = () => {
       variant="dark"
       collapseOnSelect
       expand="lg"
-      style={{ minWidth: 400 }}
+      style={{ width: "100vw" }}
     >
       <Container>
         <Navbar.Brand>
@@ -48,7 +48,7 @@ const Header = () => {
           {useLocation().pathname.split("/")[1] !== "cart" && (
             <Navbar.Text className="search">
               <FormControl
-                style={{ width: 400 }}
+                style={{ width: 300 }}
                 type="search"
                 placeholder="Search a product..."
                 className="m-auto"
@@ -79,8 +79,12 @@ const Header = () => {
               </Link>
             </Nav>
             {useLocation().pathname.split("/")[1] !== "cart" && (
-              <Dropdown align="end" className="dropdown">
-                <Dropdown.Toggle variant="success">
+              <Dropdown
+                align="end"
+                className="dropdown"
+                style={{ marginBottom: 7 }}
+              >
+                <Dropdown.Toggle variant="success" style={{ marginLeft: 7 }}>
                   <i
                     className="fa-solid fa-cart-shopping"
                     color="white"
@@ -152,21 +156,29 @@ const Header = () => {
             {sign.token ? (
               <>
                 <Link to="/profile">
-                  <Button variant="light" style={{ marginLeft: 7 }}>
+                  <Button
+                    variant="light"
+                    style={{ marginLeft: 7, marginBottom: 7 }}
+                  >
                     Profile
                   </Button>
                 </Link>
-                <Button
-                  variant="light"
-                  style={{ marginLeft: 7 }}
-                  onClick={() => handleSignOut()}
-                >
-                  Logout
-                </Button>
+                <span>
+                  <Button
+                    variant="light"
+                    style={{ marginLeft: 7 }}
+                    onClick={() => handleSignOut()}
+                  >
+                    Logout
+                  </Button>
+                </span>
               </>
             ) : (
               <Link to="/login">
-                <Button variant="light" style={{ marginLeft: 7 }}>
+                <Button
+                  variant="light"
+                  style={{ marginLeft: 7, marginBottom: 7 }}
+                >
                   Login
                 </Button>
               </Link>

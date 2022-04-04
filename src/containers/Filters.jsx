@@ -23,13 +23,14 @@ const Filters = () => {
       style={{
         backgroundColor: "#343a40",
         color: "white",
-        padding: 30,
+        padding: 15,
         display: "flex",
         flexDirection: "column",
-        width: "15%",
+        width: 160,
+        margin: 0,
       }}
     >
-      <span style={{ fontSize: 30, textTransform: "uppercase" }}>
+      <span style={{ fontSize: 25, textTransform: "uppercase" }}>
         Filter Products
       </span>
       <span style={{ padding: 20 }}>

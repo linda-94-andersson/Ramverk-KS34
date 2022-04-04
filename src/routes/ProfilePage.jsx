@@ -257,7 +257,7 @@ function ProfilePage() {
               <></>
             ) : (
               <Link to="/admin">
-                <Button variant="dark" style={{ marginTop: 40 }}>
+                <Button variant="dark" style={{ marginBottom: 40 }}>
                   Admin page
                 </Button>
               </Link>

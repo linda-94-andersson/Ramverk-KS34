@@ -39,7 +39,7 @@ const SignUp = () => {
   };
 
   return (
-    <Container style={{ marginTop: 40, width: "50%" }}>
+    <Container style={{ marginTop: 40 }}>
       <>
         {auth._id ? (
           <Link to="/login">

@@ -21,10 +21,10 @@ function Cart() {
     <>
       {Object.keys(cart).length === 0 ? (
         <div style={{ display: "flex" }}>
-          <div style={{ width: "70vw", padding: 20 }}>
+          <div style={{ width: "60vw", padding: 15 }}>
             <ListGroup>
               <ListGroup.Item
-                style={{ minHeight: 200, width: "65vw" }}
+                style={{ minHeight: 200, width: "55vw" }}
                 className="cart-list-g-item"
               >
                 <Row>
@@ -42,11 +42,11 @@ function Cart() {
               padding: 30,
               display: "flex",
               flexDirection: "column",
-              width: "30%",
+              minWidth: "40vw",
             }}
           >
-            <span style={{ fontSize: 25 }}>Subtotal ({cart.length}) items</span>
-            <span style={{ fontWeight: 700, fontSize: 20, paddingBottom: 25 }}>
+            <span style={{ fontSize: 20 }}>Subtotal ({cart.length}) items</span>
+            <span style={{ fontWeight: 700, fontSize: 15, paddingBottom: 25 }}>
               Total: $ {total}
             </span>
             <Button type="button" disabled={cart.length === 0}>
@@ -56,12 +56,12 @@ function Cart() {
         </div>
       ) : (
         <div style={{ display: "flex" }}>
-          <div style={{ width: "70vw", padding: 20 }}>
+          <div style={{ width: "60vw", padding: 15 }}>
             <ListGroup>
               {cart.map((props) => (
                 <ListGroup.Item
                   key={props.id}
-                  style={{ minHeight: 200, width: "65vw" }}
+                  style={{ minHeight: 200, width: "55vw" }}
                   className="cart-list-g-item"
                 >
                   <Row>
@@ -168,11 +168,11 @@ function Cart() {
               padding: 30,
               display: "flex",
               flexDirection: "column",
-              width: "30%",
+              minWidth: "40vw",
             }}
           >
-            <span style={{ fontSize: 25 }}>Subtotal ({cart.length}) items</span>
-            <span style={{ fontWeight: 700, fontSize: 20, paddingBottom: 25 }}>
+            <span style={{ fontSize: 20 }}>Subtotal ({cart.length}) items</span>
+            <span style={{ fontWeight: 700, fontSize: 15, paddingBottom: 25 }}>
               Total: $ {total}
             </span>
             <Button type="button">Proceed to Checkout</Button>

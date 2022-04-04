@@ -33,7 +33,7 @@ const ProductDetail = () => {
         <div>...Loading</div>
       ) : (
         <Container
-          style={{ padding: 20, display: "flex", width: "50vw" }}
+          style={{ padding: 20, display: "flex", width: "70vw" }}
           key={id}
         >
           <Card>
@@ -53,59 +53,69 @@ const ProductDetail = () => {
                 <h4>{category}</h4>
                 <p>{description}</p>
               </Card.Subtitle>
-              {cart.some((b) => b.id === id) ? (
-                <>
-                <Button
-                  onClick={() => {
-                    cartDispatch({
-                      type: ActionTypes.REMOVE_FROM_CART,
-                      payload: product,
-                    });
-                  }}
-                  variant="danger"
-                >
-                  Remove from cart
-                </Button>
-                 <Button
-                 style={{ width: 150, marginLeft: 20 }}
-                 value={qty}
-                 variant="dark"
-                 onClick={(e) => {
-                   cartDispatch({
-                     type: ActionTypes.ADD_TO_QTY,
-                     payload: {
-                       id: id,
-                       qty: e.target.value + 1,
-                     },
-                   });
-                 }}
-               >
-                 Add more +
-               </Button>
-               </>
-              ) : (
-                <Button
-                  variant="dark"
-                  onClick={() => {
-                    cartDispatch({
-                      type: ActionTypes.ADD_TO_CART,
-                      payload: product,
-                    });
-                  }}
-                >
-                  Add to Cart
-                </Button>
-              )}
-              <Link to="/cart">
-                <Button style={{ width: 150, marginLeft: 20 }} variant="dark">
-                  Go to cart
-                </Button>
-              </Link>
-              <Link to="/products">
-                <Button style={{ width: 150, marginLeft: 20 }} variant="dark">
-                  Back to products
-                </Button>
-              </Link>
+              <Container>
+                {cart.some((b) => b.id === id) ? (
+                  <>
+                    <Button
+                      style={{ width: 150, marginLeft: 20, marginBottom: 5 }}
+                      onClick={() => {
+                        cartDispatch({
+                          type: ActionTypes.REMOVE_FROM_CART,
+                          payload: product,
+                        });
+                      }}
+                      variant="danger"
+                    >
+                      Remove from cart
+                    </Button>
+                    <Button
+                      style={{ width: 150, marginLeft: 20, marginBottom: 5 }}
+                      value={qty}
+                      variant="dark"
+                      onClick={(e) => {
+                        cartDispatch({
+                          type: ActionTypes.ADD_TO_QTY,
+                          payload: {
+                            id: id,
+                            qty: e.target.value + 1,
+                          },
+                        });
+                      }}
+                    >
+                      Add more +
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    style={{ width: 150, marginLeft: 20, marginBottom: 5 }}
+                    variant="dark"
+                    onClick={() => {
+                      cartDispatch({
+                        type: ActionTypes.ADD_TO_CART,
+                        payload: product,
+                      });
+                    }}
+                  >
+                    Add to Cart
+                  </Button>
+                )}
+                <Link to="/cart">
+                  <Button
+                    style={{ width: 150, marginLeft: 20, marginBottom: 5 }}
+                    variant="dark"
+                  >
+                    Go to cart
+                  </Button>
+                </Link>
+                <Link to="/products">
+                  <Button
+                    style={{ width: 150, marginLeft: 20, marginBottom: 5 }}
+                    variant="dark"
+                  >
+                    Back to products
+                  </Button>
+                </Link>
+              </Container>
             </Card.Body>
           </Card>
         </Container>
