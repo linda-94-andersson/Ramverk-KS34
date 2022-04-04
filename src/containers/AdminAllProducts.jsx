@@ -7,7 +7,7 @@ import {
   Card,
   Button,
   Form,
-  Dropdown,
+  Accordion,
 } from "react-bootstrap";
 import { deleteProd, updateProductData } from "../redux/actions/productActions";
 import { replaceItemAtIndex, removeItemAtIndex } from "../utils";
@@ -30,8 +30,7 @@ function AdminAllProducts() {
     );
   };
 
-  const handleSubmit = (e, productId) => {
-    e.preventDefault();
+  const handleSubmit = (productId) => {
     const i = prodData.findIndex((prod) => prod.id === productId);
     if (i < 0) {
       return;
@@ -50,25 +49,30 @@ function AdminAllProducts() {
       const data = prodData.find((prod) => {
         return prod.id === product.id;
       });
-      const { id, title, image, price, category } = data || product;
+      const { id, title, image, price, category, description } =
+        data || product;
       return (
         <section key={id}>
           {Object.keys(product).length === 0 ? (
             <div>...Loading</div>
           ) : (
-            <Container style={{ width: "68.3vw" }}>
-              <Card style={{ paddingTop: 5 }}>
+            <Container>
+              <Card style={{ paddingTop: 5, flexDirection: "row " }}>
                 <Card.Img
-                  style={{ height: 100, objectFit: "contain" }}
+                  style={{ height: 100, objectFit: "contain", width: "10%" }}
                   src={image}
                   alt={title}
                 />
                 <Card.Body style={{ display: "inline" }}>
-                  <Form onSubmit={(e) => handleSubmit(e, id)}>
+                  <Form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleSubmit(id);
+                    }}
+                  >
                     <Form.Group>
                       <Card.Title style={{ margin: 5 }}>
                         <Form.Control
-                          style={{ width: "40vw" }}
                           type="text"
                           value={title}
                           onChange={(e) =>
@@ -78,7 +82,6 @@ function AdminAllProducts() {
                       </Card.Title>
                       <Card.Subtitle style={{ margin: 5 }}>
                         <Form.Control
-                          style={{ width: "40vw" }}
                           type="text"
                           value={price}
                           onChange={(e) =>
@@ -86,11 +89,17 @@ function AdminAllProducts() {
                           }
                         />
                         <Form.Control
-                          style={{ width: "40vw" }}
                           type="text"
                           value={category}
                           onChange={(e) =>
                             handleUpdate(product, "category", e.target.value)
+                          }
+                        />
+                        <Form.Control
+                          type="text"
+                          value={description}
+                          onChange={(e) =>
+                            handleUpdate(product, "description", e.target.value)
                           }
                         />
                       </Card.Subtitle>
@@ -119,23 +128,10 @@ function AdminAllProducts() {
   return (
     <Row>
       <Col>
-        <Dropdown
-          id="dropdown-basic"
-          autoClose={false}
-          style={{ cursor: "default" }}
-        >
-          <Dropdown.Toggle
-            variant="secondary"
-            style={{ width: "70vw", marginBottom: 10 }}
-          >
-            All products
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item style={{ cursor: "default" }}>
-              {renderProducts()}
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <Accordion.Item eventKey="products">
+          <Accordion.Header>All products</Accordion.Header>
+          <Accordion.Body>{renderProducts()}</Accordion.Body>
+        </Accordion.Item>
       </Col>
     </Row>
   );

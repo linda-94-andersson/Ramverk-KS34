@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Col, Container, Row, Dropdown, Table } from "react-bootstrap";
+import { Col, Container, Row, Accordion, Table } from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
 import { getCarts } from "../redux/actions/productActions";
 
@@ -21,7 +21,7 @@ function AdminAllCarts() {
       const user = allUsers.find((user) => user.id === userId);
       return (
         <section key={id}>
-          <Container style={{ width: "68.3vw" }}>
+          <Container>
             <Table responsive striped bordered>
               <thead>
                 <tr>
@@ -71,23 +71,10 @@ function AdminAllCarts() {
   return (
     <Row>
       <Col>
-        <Dropdown
-          id="dropdown-basic"
-          autoClose={false}
-          style={{ cursor: "default" }}
-        >
-          <Dropdown.Toggle
-            variant="secondary"
-            style={{ width: "70vw", marginBottom: 10 }}
-          >
-            All carts
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item style={{ cursor: "default" }}>
-              {renderCarts()}
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <Accordion.Item eventKey="carts">
+          <Accordion.Header>All carts</Accordion.Header>
+          <Accordion.Body>{renderCarts()}</Accordion.Body>
+        </Accordion.Item>
       </Col>
     </Row>
   );

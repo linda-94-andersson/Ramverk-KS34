@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Col, Container, Row, Dropdown, Table } from "react-bootstrap";
-import useAuth from "../hooks/useAuth";
+import { Col, Container, Row, Table, Accordion } from "react-bootstrap";
 import { getAllUsers } from "../redux/actions/authActions";
 
 function AdminAllUsers() {
@@ -21,7 +20,7 @@ function AdminAllUsers() {
           {Object.keys(user).length === 0 ? (
             <div>...Loading</div>
           ) : (
-            <Container style={{ width: "68.3vw" }}>
+            <Container>
               <Table responsive striped bordered>
                 <thead>
                   <tr>
@@ -66,23 +65,10 @@ function AdminAllUsers() {
   return (
     <Row>
       <Col>
-        <Dropdown
-          id="dropdown-basic"
-          autoClose={false}
-          style={{ cursor: "default" }}
-        >
-          <Dropdown.Toggle
-            variant="secondary"
-            style={{ width: "70vw", marginBottom: 10 }}
-          >
-            All users
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item style={{ cursor: "default" }}>
-              {renderUsers()}
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <Accordion.Item eventKey="users">
+          <Accordion.Header>All users</Accordion.Header>
+          <Accordion.Body>{renderUsers()}</Accordion.Body>
+        </Accordion.Item>
       </Col>
     </Row>
   );

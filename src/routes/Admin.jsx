@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Navigate } from "react-router-dom";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Accordion } from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
 import AdminAllProducts from "../containers/AdminAllProducts";
 import AdminAllUsers from "../containers/AdminAllUsers";
@@ -32,9 +32,11 @@ function Admin() {
   ) : (
     <>
       <Container style={{ marginTop: 40 }}>
-        <AdminAllProducts />
-        <AdminAllUsers />
-        <AdminAllCarts />
+        <Accordion>
+          <AdminAllProducts />
+          <AdminAllUsers />
+          <AdminAllCarts />
+        </Accordion>
         <Button
           variant="dark"
           style={{ position: "fixed", bottom: 20, right: 20 }}
