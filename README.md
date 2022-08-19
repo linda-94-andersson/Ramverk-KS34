@@ -1,9 +1,21 @@
-# Kunskapskontroll 4
-
-
 ## Deployment
+* https://ramverk-ks4.netlify.app/
 
-https://ramverk-ks4.netlify.app/
+## Skills used for this project
+* HTML
+* CSS
+* JavaScript
+* React
+* Redux
+* Axios
+* API
+* Bootstrap
+* Vite
+* Netlify
+
+## Requirements
+
+# Kunskapskontroll 4
 
 ## What
 
@@ -44,24 +56,38 @@ Ni kommer inte längre få använda exempelvis en JSON-fil med produktinformatio
 
 Denna kunskapskontrollen kan du uppnå betygen Väl Godkänt, Godkänt eller Icke Godkänt.
 
-För betyget Godkänt behöver följande krav uppfyllas:
+## För betyget Godkänt behöver följande krav uppfyllas:
 
-- Det ska fortsatt finnas sidor för produkter, enskild produkt, cart som i K3.
-- En användare ska kunna registrera sig, logga in och logga ut
-- En inloggad användare ska kunna besöka en särskild sida där de kan se sin konto-information
-- En admin ska kunna logga in
-- En admin ska kunna besöka en särskild sida endast en inloggad admin kan besöka, med en lista på samtliga produkter och användare
-- Applikationen ska använda all produktinformation från backenden
-- Applikationen ska inte använda importerade lokala filer eller s.k. hårdkodade produktlistor.
-- Applikationen ska använda stores för att hantera användar- och produkt-data från backenden
-- Applikationen ska använda stores för att förse olika Sidor/Routes med användar- och produkt-data, inte props
-- Applikationen ska använda ett (1) huvudsakligt sätt att styla applikationen och inte mixa olika sätt utan anledning
-- Applikationen ska finnas deployad/publicerad på exempelvis Netlify eller Github Pages
-- Genomförandet av en muntlig presentation och demo
+* Det ska fortsatt finnas sidor för produkter, enskild produkt, cart som i K3.
 
-För betyget Väl Godkänt behöver kraven för Godkänt uppfyllas, samt följande krav uppfyllas:
+* En användare ska kunna registrera sig, logga in och logga ut
 
-- En användare ska kunna filtrera produkterna i produktlistan per kategori
-- En användare ska kunna uppdatera sin konto-information under ex. "min profil"
-- En admin ska kunna uppdatera och ta bort en produkt i admin-panelen
-- En admin ska kunna se en lista på carts i admin-panelen, som ska visa vems det är och produkterna i dessa
+* En inloggad användare ska kunna besöka en särskild sida där de kan se sin konto-information
+
+* En admin ska kunna logga in
+
+* En admin ska kunna besöka en särskild sida endast en inloggad admin kan besöka, med en lista på samtliga produkter och användare
+
+* Applikationen ska använda all produktinformation från backenden
+
+* Applikationen ska inte använda importerade lokala filer eller s.k. hårdkodade produktlistor.
+
+* Applikationen ska använda stores för att hantera användar- och produkt-data från backenden
+
+* Applikationen ska använda stores för att förse olika Sidor/Routes med användar- och produkt-data, inte props
+
+* Applikationen ska använda ett (1) huvudsakligt sätt att styla applikationen och inte mixa olika sätt utan anledning
+
+* Applikationen ska finnas deployad/publicerad på exempelvis Netlify eller Github Pages
+
+* Genomförandet av en muntlig presentation och demo
+
+## För betyget Väl Godkänt behöver kraven för Godkänt uppfyllas, samt följande krav uppfyllas:
+
+* En användare ska kunna filtrera produkterna i produktlistan per kategori
+
+* En användare ska kunna uppdatera sin konto-information under ex. "min profil"
+
+* En admin ska kunna uppdatera och ta bort en produkt i admin-panelen
+
+* En admin ska kunna se en lista på carts i admin-panelen, som ska visa vems det är och produkterna i dessa
